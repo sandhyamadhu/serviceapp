@@ -1,11 +1,17 @@
+<?php
+ob_start();
+//error_reporting(0);
+session_start();
+include 'connect.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forms - Deep Blue Admin</title>
-
+    <title>subcategory</title>
+<h1 align="center">     Give Sub Category</h1>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="css/local.css" />
@@ -79,14 +85,14 @@
             <div class="row">
                 <div class="col-lg-6">
 
-                    <form role="form">
+                    <form  action="#" method='post' enctype="multipart/form-data">
 
                         <div class="form-group">
-                            <label>Text Input</label>
-                            <input class="form-control">
-                            <p class="help-block">Example block-level help text here.</p>
+                            <label>Item Name</label>
+                            <input class="form-control"  placeholder="Enter item name" name="name">
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
                         </div>
-
+<!--
                         <div class="form-group">
                             <label>Text Input with Placeholder</label>
                             <input class="form-control" placeholder="Enter text">
@@ -95,14 +101,43 @@
                         <div class="form-group">
                             <label>Static Control</label>
                             <p class="form-control-static">email@example.com</p>
-                        </div>
+                        </div> -->
+
 
                         <div class="form-group">
-                            <label>File input</label>
-                            <input type="file">
+                            <label>Item Image</label>
+                            <input type="file"  placeholder="Select Image" name="image" >
                         </div>
 
-                        <div class="form-group">
+
+                                                <div class="form-group" name="cost">
+                                                    <label>Item Cost</label>
+                                                    <br>
+                                                    <select>
+                            <option value="1kg-Rs.20">1kg-Rs.20</option>
+                            <option value="2kg-Rs.35">2kg-Rs.35</option>
+                            <option value="5kg-Rs.85">5kg-Rs.85</option>
+
+                            </select>
+                                                </div>
+                                                <select name="abc">
+   <option value="">SELECT YOUR CATEGORY</option>
+
+   <?php
+   $opify="SELECT category FROM  categories_details";
+                        $query = mysqli_query($con,$opify);
+                        while ($row=mysqli_fetch_assoc($query)) {
+                        echo "<option value=".$row['category'].">".$row['category']."</option>";
+                        }
+                     ?>
+</select>
+
+                        <!-- <div class="form-group">
+                            <label>Item Cost</label>
+                            <input class="form-control" placeholder="Enter Item Cost">
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-group">
                             <label>Text area</label>
                             <textarea class="form-control" rows="3"></textarea>
                         </div>
@@ -203,10 +238,47 @@
                                 <option>4</option>
                                 <option>5</option>
                             </select>
-                        </div>
+                        </div> -->
+<br>
+<br>
+                        <button type="submit" class="btn btn-default" name="btn_sub">Submit</button>
+                      </form>
+                      <?php
 
-                        <button type="submit" class="btn btn-default">Submit Button</button>
-                        <button type="reset" class="btn btn-default">Reset Button</button>
+                                         if(isset($_POST['btn_sub']))
+                                          {
+                                              $cat_name=mysqli_real_escape_string($con,$_POST['name']);
+                                                // $cat_image=mysqli_real_escape_string($con,$_POST['image']);
+                                                 $opify="SELECT cat_id FROM  categories_details WHERE category='abc'";
+                                                  $cat_cost=mysqli_real_escape_string($con,$_POST['cost']);
+                                                  $brinjal="http://24x7shoppers.com/sandhya2117/serviceapp/panel_admin/admin_images/";
+                                                  $uniqid = uniqid('',true);
+                                                  $catid=mysqli_real_escape_string($con,$_POST['abc']);
+
+
+                                                  if(($_FILES["image"]["size"])!=0)
+                              {
+                               move_uploaded_file($_FILES["image"]["tmp_name"],"admin_images/". $_FILES["image"]["name"]);
+                               $img1=$brinjal.$_FILES["image"]["name"];
+
+
+      }
+                              else
+                              {
+                                   $img1="";
+
+
+                             }  // $bdsd=mysqli_real_escape_string($con,$_POST['username']);
+                      $mmk="INSERT INTO sub_categories_details (cat_id,item_name,item_image,item_cost) values ('$catid','$cat_name','$img1','$cat_cost')";
+                      $hhby=mysqli_query($con,$mmk);
+
+                                            header("location:subcategory_insert.php?yes=1");
+                                              ob_end_flush();
+                                              exit;
+                                          }
+
+                                        ?>
+                        <!-- <button type="reset" class="btn btn-default">Reset Button</button>
 
                     </form>
 
@@ -298,8 +370,8 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+        </div> -->
 
+</div>
 </body>
 </html>

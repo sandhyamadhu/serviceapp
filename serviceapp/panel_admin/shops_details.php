@@ -1,3 +1,9 @@
+<?php
+ob_start();
+//error_reporting(0);
+session_start();
+include 'connect.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,28 +87,48 @@
 
                     <form role="form">
 
-                        <div class="form-group">
-                            <label>Text Input</label>
-                            <input class="form-control">
-                            <p class="help-block">Example block-level help text here.</p>
+
+
+                        <form  action="#" method='post' enctype="multipart/form-data">
+                            <label>Shop Name</label>
+                            <input class="form-control" name="name">
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
                         </div>
 
                         <div class="form-group">
-                            <label>Text Input with Placeholder</label>
-                            <input class="form-control" placeholder="Enter text">
+                            <label>Shop Lattitude</label>
+                            <input class="form-control" name="lat">
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
                         </div>
 
+                        <div class="form-group">
+                            <label>Shop Longitude</label>
+                            <input class="form-control" name="lng">
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <div class="form-group">
+                            <label>Shop Description</label>
+                            <input class="form-control" name="desc">
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                        </div>
+
+                        <div class="form-group">
+                            <label>Shop Address</label>
+                            <input class="form-control" name="address">
+                        </div>
+<!--
                         <div class="form-group">
                             <label>Static Control</label>
                             <p class="form-control-static">email@example.com</p>
-                        </div>
-
+                        </div> -->
+<!--
                         <div class="form-group">
                             <label>File input</label>
                             <input type="file">
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Text area</label>
                             <textarea class="form-control" rows="3"></textarea>
                         </div>
@@ -204,9 +230,31 @@
                                 <option>5</option>
                             </select>
                         </div>
+ -->
+                        <button type="submit" class="btn btn-default" name="btn_shop">Submit </button>
+                          </form>
+                          <?php
 
-                        <button type="submit" class="btn btn-default">Submit Button</button>
-                        <button type="reset" class="btn btn-default">Reset Button</button>
+                                             if(isset($_POST['btn_shop']))
+                                              {
+                                                  $s_name=mysqli_real_escape_string($con,$_POST['name']);
+                                                    $s_lat=,mysqli_real_escape_string($con,$_POST['lat']);
+                                                      $s_lng=mysqli_real_escape_string($con,$_POST['lng']);
+                                                        $s_desc=mysqli_real_escape_string($con,$_POST['desc']);
+                                                          $s_add=mysqli_real_escape_string($con,$_POST['address']);
+
+                                                  // $bdsd=mysqli_real_escape_string($con,$_POST['username']);
+                                                    $uniqid = uniqid('',true);
+                          $mmk="INSERT INTO categories_details (shop_id,shop_name,shop_lat,shop_lng,shop_desc,shop_address) values ('$s_name','$s_lat',$s_lng,$s_desc,$s_add)";
+                          $hhby=mysqli_query($con,$mmk);
+
+                                                header("location:category_insert.php?yes=1");
+                                                  ob_end_flush();
+                                                  exit;
+                                              }
+
+                                            ?>
+                        <!-- <button type="reset" class="btn btn-default">Reset Button</button>
 
                     </form>
 
@@ -298,7 +346,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </body>

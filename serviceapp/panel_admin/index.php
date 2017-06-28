@@ -4,17 +4,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup - Deep Blue Admin</title>
+    <title>login</title>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="css/local.css" />
 
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>   
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
+  <div id="wrapper">
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="navbar-header">
+            <body><h1 align="center"> ServiceApp Admin Panel </h1>
+
+              <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button> -->
+              <!-- <a class="navbar-brand" href="index.php">Back to Admin</a> -->
+          </div>
+        </div>
+<!--
     <div id="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
@@ -24,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Back to Admin</a>
+                <a class="navbar-brand" href="index.php">Back to Admin</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
@@ -37,7 +52,7 @@
                     <li><a href="forms.html"><i class="fa fa-list-ol"></i> Forms</a></li>
                     <li><a href="typography.html"><i class="fa fa-font"></i> Typography</a></li>
                     <li><a href="bootstrap-elements.html"><i class="fa fa-list-ul"></i> Bootstrap Elements</a></li>
-                    <li><a href="bootstrap-grid.html"><i class="fa fa-table"></i > Bootstrap Grid</a></li>            
+                    <li><a href="bootstrap-grid.html"><i class="fa fa-table"></i > Bootstrap Grid</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-user">
                     <li class="dropdown messages-dropdown">
@@ -72,7 +87,7 @@
                     </li>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
 
         <div id="page-wrapper">
 
@@ -80,22 +95,93 @@
 
                 <div class="col-lg-12 text-center v-center">
 
-                    <h1>Sign Up</h1>
-                    <p class="lead">Enter your email to sign-up for our newsletter</p>
+                    <h1>Sign In</h1>
+                    <!-- <p class="lead">Enter your email to sign-up for our newsletter</p> -->
 
                     <br>
                     <br>
                     <br>
 
-                    <form class="col-lg-12">
+                    <form class="col-lg-12" action="index.php" method='post' enctype="multipart/form-data">
                         <div class="input-group" style="width: 340px; text-align: center; margin: 0 auto;">
-                            <input class="form-control input-lg" title="Confidential signup."
-                                placeholder="Enter your email address" type="text">
-                            <span class="input-group-btn">
-                                <button class="btn btn-lg btn-primary" type="button">OK</button></span>
+                            <input class="form-control input-lg" title="Confidential signup." name="user"
+                                placeholder="Enter username" type="text">
+                                <div class="input-group" style="width: 340px; text-align: center; margin: 0 auto;">
+                                    <input class="form-control input-lg" title="Confidential signup." name="upass"
+                                        placeholder="Enter Password" type="text">
+<br>
+<br>
+<br>
+<br>
+<br>
+<!-- <input type="submit" style="font-face: 'Comic Sans MS'; font-size: larger; color: teal; background-color: #FFFFC0; border: 3pt ridge lightgrey" value=" Log In ;onclick:"window.location.href='index2.html'"> -->
+<!-- <a class="btn" href="index2.html">Login</a> -->
+<form>
+  <button type="submit" name="submit" class="btn btn-primary">Login</button>
+<!-- <input type="button" value="LogIn" name="btn" /> -->
+<!-- onclick="window.location.href='index2.html' -->
+</form>
+
                         </div>
+
+
                     </form>
-                </div>
+                    <?php
+
+
+
+                         if(isset($_POST['submit']))
+
+                         {
+
+
+
+                             if($_POST['user']=="abc" and $_POST['upass']=="123")
+
+                             {
+
+
+
+
+
+                                 echo "<script>window.location.href='index2.html';</script>";
+
+                                 exit;
+
+
+
+                             }
+
+                             else if($_POST['user']==" " and $_POST['upass']==" ")
+
+                             {
+
+                                 echo "invalid username or password";
+
+                             }
+                             else
+
+                             {
+
+                                 echo "invalid username or password";
+
+                             }
+
+
+
+
+
+
+
+
+
+                         }
+
+
+
+                         ?>
+
+                <!-- </div>
             </div>
             <br>
             <br>
@@ -120,8 +206,8 @@
             </div>
             <!-- /.row -->
 
-        </div>
+<!-- </div> -->
         <!-- /#page-wrapper -->
-    </div>    
+    </div>
 </body>
 </html>

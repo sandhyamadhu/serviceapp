@@ -1,10 +1,18 @@
 
+<?php
+ob_start();
+//error_reporting(0);
+session_start();
+include 'connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forms - Deep Blue Admin</title>
+    <title>category</title>
+    <h1 align="center">      Give Category         </h1>
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
@@ -79,15 +87,15 @@
             <div class="row">
                 <div class="col-lg-6">
 
-                    <form role="form">
 
-                        <div class="form-group">
-                            <label>Text Input</label>
-                            <input class="form-control">
-                            <p class="help-block">Example block-level help text here.</p>
-                        </div>
 
-                        <div class="form-group">
+                        <form  action="#" method='post' enctype="multipart/form-data">
+                            <label>Category</label>
+                            <input class="form-control" placeholder="Enter Categoty" name="cat">
+                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+
+
+                        <!-- <div class="form-group">
                             <label>Text Input with Placeholder</label>
                             <input class="form-control" placeholder="Enter text">
                         </div>
@@ -203,12 +211,29 @@
                                 <option>4</option>
                                 <option>5</option>
                             </select>
-                        </div>
+                        </div> -->
 
-                        <button type="submit" class="btn btn-default">Submit Button</button>
-                        <button type="reset" class="btn btn-default">Reset Button</button>
+                        <button type="submit" class="btn btn-default" name="btn_cat">Submit</button>
+                      </form>
+                      <?php
 
-                    </form>
+                                         if(isset($_POST['btn_cat']))
+                                          {
+                                              $cate=mysqli_real_escape_string($con,$_POST['cat']);
+                                              // $bdsd=mysqli_real_escape_string($con,$_POST['username']);
+                                                $uniqid = uniqid('',true);
+                      $mmk="INSERT INTO categories_details (category,cat_id) values ('$cate','$uniqid')";
+                      $hhby=mysqli_query($con,$mmk);
+
+                                            header("location:category_insert.php?yes=1");
+                                              ob_end_flush();
+                                              exit;
+                                          }
+
+                                        ?>
+                        <!-- <button type="reset" class="btn btn-default">Reset Button</button>
+
+
 
                 </div>
                 <div class="col-lg-6">
@@ -299,7 +324,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </body>
 </html>
